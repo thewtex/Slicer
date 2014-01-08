@@ -1,6 +1,9 @@
 project(ITKFactoryRegistration)
 
 cmake_minimum_required(VERSION 2.8.4)
+if(POLICY CMP0022)
+  cmake_policy(SET CMP0022 NEW)
+endif()
 
 find_package(ITK REQUIRED)
 
