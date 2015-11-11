@@ -15,7 +15,7 @@ ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj DEPENDS_VAR ${proj
 
 if(${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   unset(ITK_DIR CACHE)
-  find_package(ITK 4.6 REQUIRED NO_MODULE)
+  find_package(ITK 4.9 REQUIRED NO_MODULE)
 endif()
 
 # Sanity checks
@@ -29,14 +29,14 @@ if(NOT DEFINED ITK_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
       set(git_protocol "git")
   endif()
 
-  set(ITKv4_REPOSITORY ${git_protocol}://github.com/Slicer/ITK.git)
+  set(ITKv4_REPOSITORY ${git_protocol}://github.com/InsightSoftwareConsortium/ITK.git)
   # ITK release branch of 2015-10-23 (38095f7) with
   #   * Slicer patches for CMP0042 (See Slicer r24522)
   #   * backported ITK ExternalModule support
   #   * backported segfault fix for IsolatedWatershed Threshold (Slicer #4065)
   #   * backported segfault fix for DiffusionTensor3DReconstruction
   #   * backported tweaks for optional ITK Python wrapping
-  set(ITKv4_GIT_TAG 03055046e2693349937339975df4e16b598609c1)
+  set(ITKv4_GIT_TAG e49752565a0a8a892875c1e16a630ba0f4d371d0)
 
   set(EXTERNAL_PROJECT_OPTIONAL_CMAKE_CACHE_ARGS)
 
