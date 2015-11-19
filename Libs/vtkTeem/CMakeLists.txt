@@ -130,6 +130,7 @@ add_library(${lib_name} ${srcs})
 
 if(${VTK_VERSION_MAJOR} GREATER 5)
   # Minimum set of libraries already specified using components
+  find_package(VTK 6.1 COMPONENTS ${Slicer_VTK_COMPONENTS} REQUIRED NO_MODULE)
 
   # Teem vtkNRRDReader overwrites VTK vtkNrrdReader
   set(VTK_WRAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${VTK_INCLUDE_DIRS}
