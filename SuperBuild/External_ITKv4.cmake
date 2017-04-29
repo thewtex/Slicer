@@ -31,18 +31,19 @@ if(NOT DEFINED ITK_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
 
   ExternalProject_SetIfNotDefined(
     ${CMAKE_PROJECT_NAME}_${proj}_GIT_REPOSITORY
-    "${git_protocol}://github.com/Slicer/ITK.git"
+    "${git_protocol}://github.com/thewtex/ITK.git"
     QUIET
     )
 
-  # ITK release v4.11.0 from 2017.01.22 with
+  # ITK 2017-03-28 master with MINC netcdf dependency fixes
+  # Does NOT Have:
   # * Slicer patches for CMP0042
   # * Revert "BUG: Binary include directory added only if enabled shared" (ITK-3529)
   # * Revert "BUG: Include installed modules in ITK_MODULES_ENABLED" (ITK-3529)
   # * COMP: Add missing headers in OpenCVImageBridge
   ExternalProject_SetIfNotDefined(
     ${CMAKE_PROJECT_NAME}_${proj}_GIT_TAG
-    "1619816e48b327c4c486b76aef0c229af65b92b2" # slicer-v4.11.0-2017-01-22
+    "bbfbfbd44eb9cdd8d90fb52924ad577d665646e9"
     QUIET
     )
 
