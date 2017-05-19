@@ -31,7 +31,7 @@ if(NOT DEFINED ITK_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
 
   ExternalProject_SetIfNotDefined(
     ${CMAKE_PROJECT_NAME}_${proj}_GIT_REPOSITORY
-    "${git_protocol}://github.com/Slicer/ITK.git"
+    "${git_protocol}://github.com/thewtex/ITK.git"
     QUIET
     )
 
@@ -40,7 +40,7 @@ if(NOT DEFINED ITK_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   # * MINC patch to support building using redhat devtoolset 2
   ExternalProject_SetIfNotDefined(
     ${CMAKE_PROJECT_NAME}_${proj}_GIT_TAG
-    "3cc1a24d456ba41abff3e8508765f8f8d71bfcab" # slicer-v4.12.0-2017-05-09-2d63918
+    "5020fc32e6b370b897849eb504a9e24199ba02f3"
     QUIET
     )
 
@@ -104,6 +104,7 @@ if(NOT DEFINED ITK_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
       -DModule_ITKReview:BOOL=ON
       -DModule_MGHIO:BOOL=ON
       -DModule_ITKIOMINC:BOOL=ON
+      -DModule_IOScanco:BOOL=ON
       -DBUILD_SHARED_LIBS:BOOL=ON
       -DITK_INSTALL_NO_DEVELOPMENT:BOOL=ON
       -DKWSYS_USE_MD5:BOOL=ON # Required by SlicerExecutionModel
