@@ -42,6 +42,12 @@ public:
     return FileName;
   }
 
+  void SetOldFileName(const char *);
+  char *GetOldFileName() {
+    return OldFileName;
+  }
+
+
   ///
   /// use compression if possible
   vtkGetMacro (UseCompression, int);
@@ -72,6 +78,7 @@ protected:
   ~vtkITKImageWriter();
 
   char *FileName;
+  char *OldFileName;
   vtkMatrix4x4* RasToIJKMatrix;
   vtkMatrix4x4* MeasurementFrameMatrix;
   int UseCompression;

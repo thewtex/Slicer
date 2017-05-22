@@ -38,6 +38,7 @@
 #include <itkMetaDataObjectBase.h>
 #include <itkVTKImageImport.h>
 
+#include "itkScancoImageIO.h"
 
 vtkStandardNewMacro(vtkITKImageWriter);
 
@@ -155,6 +156,7 @@ void ITKWriteVTKImage(vtkITKImageWriter *self, vtkImageData *inputImage, char *f
 
   ConnectPipelines(vtkExporter.GetPointer(), itkImporter);
 
+  itk::ImageIOBase::Pointer imageIOSmart;
   // write image
   if(self->GetImageIOClassName())
     {
@@ -162,7 +164,14 @@ void ITKWriteVTKImage(vtkITKImageWriter *self, vtkImageData *inputImage, char *f
       itk::ObjectFactoryBase::CreateInstance(self->GetImageIOClassName());
     itk::ImageIOBase* imageIOType = dynamic_cast< itk::ImageIOBase * >(
       objectType.GetPointer());
+    if( strcmp( self->GetImageIOClassName(), "ScancoImageIO" ) == 0 )
+      {
+      imageIOSmart = itk::ScancoImageIO::New();
+      imageIOType = imageIOSmart.GetPointer();
+      }
     if(imageIOType){
+      imageIOType->SetFileName( self->GetOldFileName() );
+      imageIOType->ReadImageInformation();
       itkImageWriter->SetImageIO(imageIOType);
       }
     }
@@ -242,6 +251,7 @@ void ITKWriteVTKImage(vtkITKImageWriter *self, vtkImageData *inputImage, char *f
 vtkITKImageWriter::vtkITKImageWriter()
 {
   this->FileName = NULL;
+  this->OldFileName = NULL;
   this->RasToIJKMatrix = NULL;
   this->MeasurementFrameMatrix = NULL;
   this->UseCompression = 0;
@@ -257,6 +267,11 @@ vtkITKImageWriter::~vtkITKImageWriter()
     {
     delete [] this->FileName;
     this->FileName = NULL;
+    }
+  if (this->OldFileName)
+    {
+    delete [] this->OldFileName;
+    this->OldFileName = NULL;
     }
 
   if (this->ImageIOClassName)
@@ -298,6 +313,28 @@ void vtkITKImageWriter::SetFileName(const char *name)
 
   this->FileName = new char[strlen(name) + 1];
   strcpy(this->FileName, name);
+  this->Modified();
+}
+
+//----------------------------------------------------------------------------
+// This function sets the name of the file.
+void vtkITKImageWriter::SetOldFileName(const char *name)
+{
+  if ( this->OldFileName && name && (!strcmp(this->OldFileName,name)))
+    {
+    return;
+    }
+  if (!name && !this->OldFileName)
+    {
+    return;
+    }
+  if (this->OldFileName)
+    {
+    delete [] this->OldFileName;
+    }
+
+  this->OldFileName = new char[strlen(name) + 1];
+  strcpy(this->OldFileName, name);
   this->Modified();
 }
 

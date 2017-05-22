@@ -691,6 +691,7 @@ std::string vtkMRMLVolumeArchetypeStorageNode::UpdateFileList(vtkMRMLNode *refNo
   // set up the writer and write
   vtkNew<vtkITKImageWriter> writer;
   writer->SetFileName(tempName.c_str());
+  writer->SetOldFileName(oldName.c_str());
   writer->SetInputData( volNode->GetImageData() );
   writer->SetUseCompression(this->GetUseCompression());
   if(this->WriteFileFormat)
