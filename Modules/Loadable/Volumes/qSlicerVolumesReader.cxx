@@ -39,6 +39,8 @@
 #include <vtkSmartPointer.h>
 #include <vtkStringArray.h>
 
+#include "itkScancoImageIOFactory.h"
+
 //-----------------------------------------------------------------------------
 class qSlicerVolumesReaderPrivate
 {
@@ -58,6 +60,7 @@ qSlicerVolumesReader::qSlicerVolumesReader(vtkSlicerVolumesLogic* logic, QObject
   : Superclass(_parent)
   , d_ptr(new qSlicerVolumesReaderPrivate)
 {
+  itk::ScancoImageIOFactory::RegisterOneFactory();
   this->setLogic(logic);
 }
 
@@ -97,7 +100,7 @@ QStringList qSlicerVolumesReader::extensions()const
 {
   // pic files are bio-rad images (see itkBioRadImageIO)
   return QStringList()
-    << "Volume (*.hdr *.nhdr *.nrrd *.mhd *.mha *.mnc *.vti *.nii *.nii.gz *.mgh *.mgz *.mgh.gz *.img *.img.gz *.pic)"
+    << "Volume (*.hdr *.nhdr *.nrrd *.mhd *.mha *.mnc *.isq *.vti *.nii *.nii.gz *.mgh *.mgz *.mgh.gz *.img *.img.gz *.pic)"
     << "Dicom (*.dcm *.ima)"
     << "Image (*.png *.tif *.tiff *.jpg *.jpeg)"
     << "All Files (*)";

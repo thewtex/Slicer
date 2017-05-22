@@ -68,6 +68,8 @@ ITKImageFileFormat FileFormatTable[] =
   {"PNGImageIO", "RLE compressed pixel data in binary", "PNG", ".PNG"},
 //  {"SiemensVisionImageIO", "Not available for writing", "Siemens", "---"},
   {"StimulateImageIO", "Uncompressed pixel data in binary", "Stimulate", ".spr"},
+  {"ScancoImageIO", "Uncompressed pixel data in binary", "Scanco", ".isq"},
+  {"ScancoImageIO", "Uncompressed pixel data in binary", "Scanco", ".ISQ"},
   {"TIFFImageIO", "Compressed pixel data in binary", "TIFF", ".tiff"},
   {"TIFFImageIO", "Compressed pixel data in binary", "TIFF", ".tif"},
   {"TIFFImageIO", "Compressed pixel data in binary", "TIFF", ".TIFF"},
